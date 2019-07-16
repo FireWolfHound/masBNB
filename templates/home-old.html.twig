@@ -1,0 +1,38 @@
+<h1>Coucou 2</h1>
+
+<a href="{{ path('hello', {'prenom' : 'Yuval'}) }}">Hello</a>
+
+<h2>{{ age }}</h2>
+
+{% if age >= 18 %}
+    <p> Vous êtes majeur </p>
+{% else %}
+    <p> Vous êtes mineur </p>
+{% endif %}
+
+ {# boucle for dans un tableau #}
+
+{% for prenom, age in tableau %}
+{#    <p>{{ prenom }} a {{ age }} ans</p> #}
+<p>
+    {% if loop.first %}
+        Première itération :
+    {% elseif loop.last %}
+        Dernière itération :
+    {% else %}
+        Itération intermediaire :
+    {% endif %}
+
+    (Itération numéro {{ loop.index0 }} => {{ prenom }} a {{ age }} ans)
+</p>
+{% endfor %}
+
+ {# boucle for classique #}
+<ul>
+    {% for i in 0..10 %}
+        <li>{{ i }}</li>
+    {% endfor %}
+</ul>
+
+<h1>{{ title | upper }}</h1>
+<h1>{{ title | base64_encode }}</h1>
