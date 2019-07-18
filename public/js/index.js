@@ -1,0 +1,1 @@
+$(".alert-dismissible").show("slow").delay(11000).hide("slow");
