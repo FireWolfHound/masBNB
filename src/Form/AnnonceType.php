@@ -15,13 +15,13 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class AnnonceType extends AbstractType
 {
-    private function getConfiguration($label, $placeholder){
-        return [
+    private function getConfiguration($label, $placeholder, $options = []){
+        return array_merge([
             'label' => $label,
             'attr' => [
                 'placeholder' => $placeholder
             ]
-        ];
+        ], $options);
     }
 
     public function buildForm(FormBuilderInterface $builder, array $options)
@@ -33,7 +33,7 @@ class AnnonceType extends AbstractType
             )
             ->add('slug',
                 TextType::class,
-                $this->getConfiguration('Slug', 'Votre titre sans espace')
+                $this->getConfiguration('Slug', 'Votre titre sans espace', [ 'required' => false])
             )
             ->add('introduction',
                 TextType::class,
@@ -59,7 +59,8 @@ class AnnonceType extends AbstractType
                 CollectionType::class,
                 [
                     'entry_type' => ImageType::class,
-                    'allow_add' => true
+                    'allow_add' => true,
+                    'allow_delete' => true,
                 ]
             )
         ;

@@ -2,7 +2,7 @@
 
 {% block title %}Création d'une annonce{% endblock %}
 
-{% form_theme form _self %}
+{% form_theme form "ad/_collection.html.twig" %}
 
 {% block body %}
     <div class="container">
@@ -15,54 +15,7 @@
     </div>
 {% endblock %}
 
-{% block _annonce_images_widget %}
-    {#Nom de ce bloc car c'est l'id du bloc html quand c'est crée. Norm: _{ID}_widget #}
-    {{ form_widget(form) }}
-
-    <div class="form-group">
-        <button type="button" class="btn btn-warning" id="add-image">Ajouter une image</button>
-    </div>
-{% endblock %}
-
-{% block _annonce_images_entry_row %}
-    {{ form_widget(form) }}
-{% endblock %}
-
-{% block _annonce_images_entry_widget %}
-    <div class="form-group">
-        <div class="row">
-            <div class="col-10">
-                <div class="row">
-                    <div class="col-5">
-                        {{ form_label(form.url, 'URL' ) }}
-                        {{ form_widget(form.url)}}
-                    </div>
-                    <div class="col-5">
-                        {{ form_label(form.caption, 'Caption') }}
-                        {{ form_widget(form.caption)}}
-                    </div>
-                </div>
-            </div>
-            <div class="col-2">
-                <button type="button" class="btn btn-danger" data-target="#block{{ id }}" data-action="delete" style="margin-top: 7%;">X</button>
-            </div>
-        </div>
-    </div>
-{% endblock %}
 
 {% block javascripts %}
-    <script>
-        // au click sur le button
-        $('#add-image').click(function () {
-            // Je récupère le nombre d'entrée que je vais créer
-            const index = $('#annonce_images div.form-group').length;
-
-            // Je récupère le prototype des entrées
-            const tmpl = $('#annonce_images').data('prototype').replace(/__name__/g, index);
-
-            //J'injecte se code au sein de la div
-            $('#annonce_images').append(tmpl)
-
-        })
-    </script>
+    <script src="/js/ad.js"></script>
 {% endblock %}
